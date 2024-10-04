@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Performance Game</title>
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <!-- Row for the header and intro -->
+        <div class="row my-4">
+            <div class="col-md-12 text-center">
+                <h1>Build a Racecar</h1>
+                <p>Practice project utilizing HTML, CSS, an SQLite database, and Node.js backend. The site uses Bootstrap CSS.</p>
+                <p >Current features: Add items to database / Show all items in database // Show installed parts / Show Car Stats / Update car stats after part purchase / Show budget // Update budget after purchase.</p>
+                <p>Features and changes to be done: Creating a preset of parts // Limiting parts per category // Setting tresholds and indicators for too high emissions and too low handling etc.
+                <p>The game idea is that you can upgrade your car using performance parts. You have a limited budget. Try to keep the emissions within limits while increasing power without sacrificing too much handling. Good luck!</p>
+                <img src="assets/pictures/oamk.png" alt="oamk kuva" class="img-fluid mb-4">
+            </div>
+        </div>
+
+        <!-- Row for adding a new car part -->
+        <div class="row my-4">
+            <div class="col-md-6">
+                <h2>Add a New Car Part</h2>
+                <p>You can define and add new parts. These are added to the database, and you can purchase them.</p>
+                <form id="partForm">
+                    <div class="form-group">
+                        <label for="category">Category:</label>
+                        <select id="category" name="category" class="form-control" required>
+                            <option value="">Select a category</option>
+                            <option value="engine">Engine</option>
+                            <option value="exhaust">Exhaust</option>
+                            <option value="suspension">Suspension</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price:</label>
+                        <input type="number" id="price" name="price" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="power">Power (HP):</label>
+                        <input type="number" id="power" name="power" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="emissions">Emissions (CO2):</label>
+                        <input type="number" id="emissions" name="emissions" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="handling">Handling:</label>
+                        <input type="number" id="handling" name="handling" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Part</button>
+                </form>
+            </div>
+
+            <!-- Car stats section next to the form -->
+            <div class="col-md-6">
+                <h2>Your Car Stats</h2>
+                <p class="lead">Here you can see the current stats of your car, based on the parts you have installed.</p>
+                <ul class="list-group">
+                    <li class="list-group-item">Power: <span id="car-power">0</span> HP</li>
+                    <li class="list-group-item">Emissions: <span id="car-emissions">0</span></li>
+                    <li class="list-group-item">Handling: <span id="car-handling">0</span></li>
+                </ul>
+                
+                <h2>Installed Parts</h2>
+                <ul id="installedPartsList">
+                    <!-- Installed parts will be listed here -->
+                </ul>
+                <!-- Show user budget under Car stats div -->
+                <h2 class="mt-4">User Budget</h2>
+                <p id="user-budget">Budget: $1000</p>
+            </div>
+        </div>
+
+        <!-- Row for available parts list -->
+        <div class="row my-4">
+            <div class="col-md-12">
+                <h2>Available Parts</h2>
+                <p class="lead">Here you can see all the available items that you can purchase for your car.</p>
+                <div id="parts" class="row">
+                    <!-- The JavaScript code will insert card elements here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/javascript/main.js"></script>
+    
+</body>
+</html>
