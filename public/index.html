@@ -71,9 +71,23 @@
                 </ul>
                 
                 <h2>Installed Parts</h2>
-                <ul id="installedPartsList">
-                    <!-- Installed parts will be listed here -->
-                </ul>
+               <table id="installedPartsTable" class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Power</th>
+                        <th>Emissions (CO2)</th>
+                        <th>Handling</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+               
+                <tbody id="installedPartsBody">
+                  <!-- Rows will be inserted here dynamically -->
+                </tbody>
+                </table>
+
                 <!-- Show user budget under Car stats div -->
                 <h2 class="mt-4">User Budget</h2>
                 <p id="user-budget">Budget: $1000</p>

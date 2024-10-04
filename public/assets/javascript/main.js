@@ -6,6 +6,25 @@ let carStats = {
 };
 let installedParts = [];
 
+// Update the installed car parts list right after page reload
+document.addEventListener('DOMContentLoaded', () => {
+    // Load saved parts from localStorage if available
+    const savedParts = localStorage.getItem('installedParts');
+    if (savedParts) {
+        installedParts = JSON.parse(savedParts);  // Load from storage
+    } else {
+        installedParts = [];  // Initialize as empty
+    }
+     // Load saved budget from localStorage if available
+     const savedBudget = localStorage.getItem('userBudget');
+     if (savedBudget) {
+         userBudget = parseInt(savedBudget);  // Load from storage
+     }
+ 
+     updateInstalledPartsList();  // Update the UI
+     updateUI();  // Update the UI to show correct budget
+});
+
 //Add parts to database
 
 document.getElementById('partForm').addEventListener('submit', function(event) {
@@ -103,11 +122,27 @@ function handleBuy(event) {
 
 // Buying a part adds it to the installedParts-array and updates the car specs.
 function buyPart(part) {
+    // Check if the exact same part is already installed
+    const existingPart = installedParts.find(p => p.name === part.name);
+    
+    if (existingPart) {
+        alert(`You already have the ${part.name} part installed. You cannot install the same part twice.`);
+        return; // Exit the function, preventing the same part from being installed
+    }
+
     installedParts.push(part);  // Add part to the installed parts array
+
+    // Save updated parts to localStorage
+    localStorage.setItem('installedParts', JSON.stringify(installedParts));
+
+    // Save updated budget to localStorage
+    localStorage.setItem('userBudget', userBudget);
+
     updateCarSpecs(); // Recalculate car specs after adding a new part
     updateInstalledPartsList(); // Update the installed parts list
     updateUI(); // Update the UI with new values (budget, car specs)
 }
+
 
 // Recalculate car specs based on installed parts
 function updateCarSpecs() {
@@ -127,36 +162,87 @@ function updateCarSpecs() {
     document.getElementById('car-handling').textContent = totalHandling;
 }
 
-// Update the list of installed parts
+// Function to update the list of installed parts
 function updateInstalledPartsList() {
-    const installedPartsList = document.getElementById('installedPartsList');
-    installedPartsList.innerHTML = '';  // Clear the list before updating
+    const installedPartsBody = document.getElementById('installedPartsBody');
+    installedPartsBody.innerHTML = '';  // Clear the table body before updating
 
     if (installedParts.length === 0) {
-        installedPartsList.textContent = 'No parts installed yet.';  // Show this if no parts are installed
+        const emptyRow = document.createElement('tr');
+        const emptyCell = document.createElement('td');
+        emptyCell.colSpan = 6;
+        emptyCell.textContent = 'No parts installed yet.';
+        emptyRow.appendChild(emptyCell);
+        installedPartsBody.appendChild(emptyRow);
     } else {
         installedParts.forEach(part => {
-            const partElement = document.createElement('li');
-            partElement.textContent = `${part.name} (Power: ${part.power}, Emissions: ${part.emissions}, Handling: ${part.handling})`;
+            const row = document.createElement('tr');
             
-            // Add an "Uninstall" button next to each part
+            // Create cells for each part attribute
+            const nameCell = document.createElement('td');
+            nameCell.textContent = part.name;
+            row.appendChild(nameCell);
+            
+            const powerCell = document.createElement('td');
+            powerCell.textContent = part.power;
+            row.appendChild(powerCell);
+            
+            const emissionsCell = document.createElement('td');
+            emissionsCell.textContent = part.emissions;
+            row.appendChild(emissionsCell);
+            
+            const handlingCell = document.createElement('td');
+            handlingCell.textContent = part.handling;
+            row.appendChild(handlingCell);
+            
+            const priceCell = document.createElement('td');
+            priceCell.textContent = `$${part.price}`;
+            row.appendChild(priceCell);
+            
+            // Create an "Uninstall" button cell
+            const actionCell = document.createElement('td');
             const uninstallButton = document.createElement('button');
             uninstallButton.textContent = 'Uninstall';
+            uninstallButton.classList.add('btn', 'btn-danger');
             uninstallButton.onclick = () => uninstallPart(part.name);
-            
-            partElement.appendChild(uninstallButton);
-            installedPartsList.appendChild(partElement);
+            actionCell.appendChild(uninstallButton);
+            row.appendChild(actionCell);
+
+            // Append the row to the table body
+            installedPartsBody.appendChild(row);
         });
     }
 }
 
+
 // Uninstall a part from the car
 function uninstallPart(partName) {
-    installedParts = installedParts.filter(part => part.name !== partName);
-    updateCarSpecs(); // Recalculate car specs after removing the part
-    updateInstalledPartsList(); // Update the list of installed parts
-    updateUI(); // Update the UI with new values
+    // Find the part that is being uninstalled
+    const partToRemove = installedParts.find(part => part.name === partName);
+
+    if (partToRemove) {
+        // Add the part's price back to the user's budget
+        userBudget += partToRemove.price;
+
+        // Remove the part from installed parts
+        installedParts = installedParts.filter(part => part.name !== partName);
+        
+        // Recalculate car specs after removing the part
+        updateCarSpecs(); 
+
+        // Update the list of installed parts
+        updateInstalledPartsList(); 
+
+        // Update the UI with new values (including the new budget)
+        updateUI();
+
+        // Save the updated installedParts and userBudget to localStorage
+        localStorage.setItem('installedParts', JSON.stringify(installedParts));
+        localStorage.setItem('userBudget', userBudget);
+    }
 }
+
+
 
 // Function to update the UI
 function updateUI() {
