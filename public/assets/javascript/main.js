@@ -6,6 +6,9 @@ let carStats = {
 };
 let installedParts = [];
 
+//Available parts are soted in SQLite database and thus not handled in localStorage, this is just for learning purposes
+
+
 // Update the installed car parts list right after page reload
 document.addEventListener('DOMContentLoaded', () => {
     // Load saved parts from localStorage if available
@@ -15,15 +18,35 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         installedParts = [];  // Initialize as empty
     }
-     // Load saved budget from localStorage if available
-     const savedBudget = localStorage.getItem('userBudget');
-     if (savedBudget) {
-         userBudget = parseInt(savedBudget);  // Load from storage
-     }
- 
-     updateInstalledPartsList();  // Update the UI
-     updateUI();  // Update the UI to show correct budget
+    // Load saved budget from localStorage if available
+    const savedBudget = localStorage.getItem('userBudget');
+    if (savedBudget) {
+        userBudget = parseInt(savedBudget);  // Load from storage
+    }
+
+    // Update the UI
+    updateInstalledPartsList();  // Update the installed parts UI
+    updateUI();  // Update the UI to show correct budget
+
+    // Add event listener for the reset button
+    const resetButton = document.getElementById('resetBudgetButton');
+    resetButton.addEventListener('click', () => {
+        // Reset user budget and installed parts
+        userBudget = 1000;  // Reset to default budget
+        installedParts = [];  // Clear installed parts
+
+        // Clear from localStorage
+        localStorage.removeItem('installedParts');
+        localStorage.removeItem('userBudget');
+
+        // Update the UI
+        updateInstalledPartsList();
+        updateUI();
+
+        console.log("Game reset: budget and installed parts cleared");
+    });
 });
+
 
 //Add parts to database
 
