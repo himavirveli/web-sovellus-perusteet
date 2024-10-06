@@ -5,18 +5,31 @@
     <title>Car Performance Game</title>
     <!-- Bootstrap CSS via CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <!-- <link rel="stylesheet" href="/css/style.css" type="text/css"> -->
 </head>
 <body>
     <div class="container">
         <!-- Row for the header and intro -->
         <div class="row my-4">
-            <div class="col-md-12 text-center">
-                <h1>Build a Racecar</h1>
-                <p>Practice project utilizing HTML, CSS, an SQLite database, and Node.js backend. The site uses Bootstrap CSS.</p>
-                <p >Current features: Add items to database / Show all items in database // Show installed parts / Show Car Stats / Update car stats after part purchase / Show budget // Update budget after purchase.</p>
-                <p>Features and changes to be done: Creating a preset of parts // Limiting parts per category // Setting tresholds and indicators for too high emissions and too low handling etc.</p>
-                <p>The game idea is that you can upgrade your car using performance parts. You have a limited budget. Try to keep the emissions within limits while increasing power without sacrificing too much handling. Good luck!</p>
+            <div class="col-md-12">
+                <h1>Let's build a racecar!</h1>
+                <p class="lead">This web app is a practice project for Web development basics course.</p>
+                <p>Site is built using <b>HTML, CSS (Bootstrap), an SQLite database and Node.js backend</b>. Criteria for the app is described <a href="https://jukkapne.github.io/WebOhjelmoinninPerusteet/">here</a></p>
+                <ul>
+                    <li>Car stats and budget are stored locally and updated always per install & uninstall of parts</li>
+                    <li>Available items (car parts) are stored in an SQLite database. Items can be added to the DB using the form. DB contents are showed on page as item cards, from which they can be purchased using the Buy-button.</li>
+                    <li>Items can be purchased and installed to the car. Installed parts and their specs are shown in a table. You can only install each part once (alert).</li>
+                    <li>Parts can be uninstalled. Their price is returned to your budget and the stats are updated accordingly.</li>
+                </ul> 
+        
+                <p>The idea is that you can upgrade your car using performance parts. You have a limited budget and you need to balance between power, emissions and handling.</p> 
+                <p>HOX currently there is no logic/limitation for adding and installing parts ie. based on category or threshold values. This will be developed step by step as I'm trying new ways to implement features.</p>
+                <ul>
+                    <li>Bugs & improvements:</li>
+                    <li>Item price is taken before duplicate check -> Need to move check to another function</li>
+                    <li>Filtering/sorting for item cards</li>
+                    <li>Game logic implementation, thresholds for car specs and a "test track" feature.</li>
+                </ul>
                 <img src="assets/pictures/oamk.png" alt="oamk kuva" class="img-fluid mb-4">
             </div>
         </div>
@@ -45,6 +58,8 @@
           
                 
                     <h2>Installed Parts</h2>
+                    <p class="lead">Here you can see all the parts you have installed on your car. You can uninstall any part by clicking the 
+                    "Uninstall" button. This will remove the part from your car and add the part's price back to your budget.</p>
                    <table id="installedPartsTable" class="table">
                     <thead>
                         <tr>
@@ -74,7 +89,7 @@
                 </div>
             </div>
          </div>
-         
+
         <!-- Row for Adding parts -->
         <div class="row my-4">
             <div class="col-md-12">
