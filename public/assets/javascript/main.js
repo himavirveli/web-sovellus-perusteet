@@ -262,6 +262,9 @@ function uninstallPart(partName) {
         // Save the updated installedParts and userBudget to localStorage
         localStorage.setItem('installedParts', JSON.stringify(installedParts));
         localStorage.setItem('userBudget', userBudget);
+
+          // Update the UI with new values (including the new budget)
+          updateUI();
     }
 }
 
