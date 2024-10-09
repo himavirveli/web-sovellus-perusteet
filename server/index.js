@@ -9,14 +9,16 @@ app.use(cors());
 // Parse JSON bodies
 app.use(express.json());
 
+
 // Database setup
-let db = new sqlite3.Database('./car-performance.db', (err) => {
+let db = new sqlite3.Database(path.join(__dirname, '../car-performance.db'), (err) => {
   if (err) {
-    console.error('Error connecting to the database', err.message);
+    console.error('Error connecting to the database:', err.message);
   } else {
     console.log('Connected to the SQLite database.');
   }
 });
+
 
 // API route for adding parts
 app.post('/api/parts', (req, res) => {

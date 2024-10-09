@@ -62,7 +62,7 @@ document.getElementById('partForm').addEventListener('submit', function(event) {
         handling: parseInt(document.getElementById('handling').value)
     };
 
-    fetch('http://localhost:3000/api/parts', {
+    fetch('/api/parts', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ document.getElementById('partForm').addEventListener('submit', function(event) {
 // Fetch Parts List and create cards for each part
 async function fetchParts() {
     try {
-        const partsResponse = await fetch('http://localhost:3000/api/parts');
+        const partsResponse = await fetch('/api/parts');
         if (!partsResponse.ok) throw new Error('Failed to fetch parts');
         
         const partsData = await partsResponse.json();
