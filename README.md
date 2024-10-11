@@ -1,2 +1,5 @@
 # webbisovellusprojekti
  
+ Vastaavuus vaatimuksiin
+
+ 

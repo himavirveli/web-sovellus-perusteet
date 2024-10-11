@@ -133,25 +133,29 @@ function handleBuy(event) {
         handling: parseInt(event.target.dataset.handling)
     };
 
-    // Check if the user has enough budget to buy the part
-    if (userBudget >= part.price) {
-        userBudget -= part.price; // Subtract price from the budget
-        buyPart(part); // Add part to installed parts and update car specs
-    } else {
-        alert('Not enough budget to buy this part!');
-    }
-}
-
-
-// Buying a part adds it to the installedParts-array and updates the car specs.
-function buyPart(part) {
     // Check if the exact same part is already installed
     const existingPart = installedParts.find(p => p.name === part.name);
     
     if (existingPart) {
         alert(`You already have the ${part.name} part installed. You cannot install the same part twice.`);
         return; // Exit the function, preventing the same part from being installed
+    } else {
+        buyPart(part); // Add part to installed parts and update car specs
     }
+    
+}
+
+
+// Buying a part adds it to the installedParts-array and updates the car specs.
+function buyPart(part) {
+    
+    // Check if the user has enough budget to buy the part
+    if (userBudget < part.price) {
+        alert('Not enough budget to buy this part!');
+                
+    } else {
+        userBudget -= part.price; // Subtract price from the budget
+        alert(`You bought the ${part.name} part for $${part.price}.`);
 
     installedParts.push(part);  // Add part to the installed parts array
 
@@ -164,6 +168,7 @@ function buyPart(part) {
     updateCarSpecs(); // Recalculate car specs after adding a new part
     updateInstalledPartsList(); // Update the installed parts list
     updateUI(); // Update the UI with new values (budget, car specs)
+    }
 }
 
 
