@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
         userBudget = parseInt(savedBudget);  // Load from storage
     }
 
+    // Event listener for the category filter
+document.getElementById('categoryFilter').addEventListener('change', () => {
+    fetchParts();  // Re-fetch and filter parts whenever the filter changes
+});
+
+
     // Update the UI
     updateInstalledPartsList();  // Update the installed parts UI
     updateUI();  // Update the UI to show correct budget
@@ -89,7 +95,15 @@ async function fetchParts() {
         const partsList = document.getElementById('parts');
         partsList.innerHTML = '';  // Clear the list before adding parts
 
-        partsData.data.forEach(part => {
+        const selectedCategory = document.getElementById('categoryFilter').value;
+
+        // Filter parts based on the selected category
+        const filteredParts = selectedCategory === 'all'
+            ? partsData.data  // Show all parts if "All Parts" is selected
+            : partsData.data.filter(part => part.category === selectedCategory);  // Filter by category
+
+        // Render filtered parts as cards
+        filteredParts.forEach(part => {
             const card = document.createElement('div');
             card.className = 'col-md-4 mb-4'; // Each card will take up 1/3rd of the row on medium screens
 
@@ -121,6 +135,7 @@ async function fetchParts() {
         console.error('Error fetching parts:', error);
     }
 }
+
 
 // Handle the Buy action when a button is clicked
 function handleBuy(event) {

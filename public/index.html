@@ -79,16 +79,30 @@
                 </div>
         </div>
 
-        <!-- Row for Available parts -->
-        <div class="row my4">
-            <div class="col-md-12">
-                <h2>Available Parts</h2>
-                <p class="lead">Here you can see all the available items that you can purchase for your car.</p>
-                <div id="parts" class="row">
-                <!-- The JavaScript code will insert card elements here -->
-                </div>
-            </div>
-         </div>
+         
+<!-- Row for Available parts -->
+<div class="row my-4">
+    <div class="col-md-12">
+        <!-- Dropdown for filtering parts -->
+        <div class="form-group mb-4">
+            <label for="categoryFilter">Filter by category:</label>
+            <select id="categoryFilter" class="form-control">
+                <option value="all">All Parts</option>
+                <option value="engine">Engine</option>
+                <option value="exhaust">Exhaust</option>
+                <option value="suspension">Suspension</option>
+            </select>
+        </div>
+
+        <!-- Parts section -->
+        <h2>Available Parts</h2>
+        <p class="lead">Here you can see all the available items that you can purchase for your car.</p>
+        <div id="parts" class="row">
+            <!-- The JavaScript code will insert card elements here -->
+        </div>
+    </div>
+</div>
+
 
         <!-- Row for Adding parts -->
         <div class="row my-4">
