@@ -18,13 +18,13 @@ Vastaavuus vaatimuksiin:
 #### 2/5: HTML structure with clear content differentiation
 - The project uses headings (`<h1>`, `<h2>`), paragraphs (`<p>`), and lists (`<ul>`) for clear content differentiation.
 - Example: Line 15 (`index.html`) has a `<h1>` for the main heading of the page.
-- Line 16 starts a <p> paragraph
-- Line 18 starts a <ul> list
+- Line 16 starts a  paragraph
+- Line 18 starts a  list
 
 #### 3/5: Use of forms, links, and media
 - A form is used to add new car parts, and external links and media (images) are present in the page.
 - Example: Line 107 (`index.html`) contains a form for adding parts, with inputs for name, price, power, emissions, and handling.
-- Line 17 has a standard link <a href>
+- Line 17 has a standard link
 - Line 28 has an <img> picture embedded
 
 #### 4/5: Tables are effectively used
