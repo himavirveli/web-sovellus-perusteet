@@ -25,11 +25,6 @@
                 <p>The idea is that you can upgrade your car using performance parts. You have a limited budget and you need to balance between power, emissions and handling.</p> 
                 <p>HOX currently there is no logic/limitation for adding and installing parts ie. based on category or threshold values. This will be developed step by step as I'm trying new ways to implement features.</p>
                 <ul>
-                    <li>Bugs & improvements:</li>
-                    <li><s>Item price is taken before duplicate check -> Need to move check to another function</s></li>
-                    <li>Filtering/sorting for item cards</li>
-                    <li>Game logic implementation, thresholds for car specs and a "test track" feature.</li>
-                </ul>
                 <img src="assets/pictures/oamk.png" alt="oamk kuva" class="img-fluid mb-4">
             </div>
         </div>
@@ -83,6 +78,7 @@
 <!-- Row for Available parts -->
 <div class="row my-4">
     <div class="col-md-12">
+        <h2>Available Parts</h2>
         <!-- Dropdown for filtering parts -->
         <div class="form-group mb-4">
             <label for="categoryFilter">Filter by category:</label>
@@ -95,7 +91,6 @@
         </div>
 
         <!-- Parts section -->
-        <h2>Available Parts</h2>
         <p class="lead">Here you can see all the available items that you can purchase for your car.</p>
         <div id="parts" class="row">
             <!-- The JavaScript code will insert card elements here -->
