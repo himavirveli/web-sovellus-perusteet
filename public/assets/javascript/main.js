@@ -1,3 +1,20 @@
+// --- Part Class ---
+class Part {
+    constructor(name, price, power, emissions, handling, category) {
+        this.name = name;
+        this.price = price;
+        this.power = power;
+        this.emissions = emissions;
+        this.handling = handling;
+        this.category = category;
+    }
+
+    // Optional: You can add a method to display part details for debugging or UI purposes
+    displayInfo() {
+        return `${this.name}: ${this.power} HP, ${this.emissions} CO2, $${this.price}`;
+    }
+}
+
 // --- Initialization ---
 
 // Starting budget and car stats
@@ -9,6 +26,11 @@ let carStats = {
 };
 let installedParts = [];
 let inactivityTimer;  // Inactivity timer variable
+
+
+    
+
+
 
 // Load saved data and initialize UI on page load
 document.addEventListener('DOMContentLoaded', initializeGame);
@@ -223,15 +245,8 @@ function handlePartSubmission(event) {
     const handling = parseInt(form.querySelector('[name="handling"]').value);
     const category = form.querySelector('[name="category"]').value;
 
-    // Create a new part object
-    const newPart = {
-        name,
-        price,
-        power,
-        emissions,
-        handling,
-        category
-    };
+    // Create a new Part object using the Part class
+    const newPart = new Part(name, price, power, emissions, handling, category);
 
     // Send the new part to the backend (assuming the API endpoint is set up for POST requests)
     fetch('/api/parts', {
@@ -243,7 +258,6 @@ function handlePartSubmission(event) {
     })
     .then(response => response.json())
     .then(data => {
-        // After successfully adding the part, fetch and display the updated parts list
         console.log('Part added successfully:', data);
         fetchParts();  // Re-fetch and display updated parts
     })
@@ -254,3 +268,4 @@ function handlePartSubmission(event) {
     // Optionally, reset the form fields
     form.reset();
 }
+
