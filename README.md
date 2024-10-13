@@ -7,7 +7,16 @@ This project is a web application where users can build a racecar by purchasing 
 
 App is hosted in AWS using EC2 Stockholm instance.
 
-Vastaavuus vaatimuksiin:
+# Main features
+
+Responsive layout: Built using Bootstrap, ensuring the app is accessible on different screen sizes.
+Dynamic parts list: Users can add new parts through a form, which updates the list in real time.
+Category filter: Allows users to filter available parts by category (engine, exhaust, suspension).
+Buy parts: Users can buy parts with a budget, and car stats are updated based on the parts purchased.
+Car stats: Power, emissions, and handling are recalculated dynamically whenever parts are added or removed.
+Inactivity timer: Automatically resets the game after 5 minutes of user inactivity.
+
+# Vastaavuus vaatimuksiin:
 
 ## 1. **HTML (25%)**
 
