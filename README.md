@@ -55,7 +55,7 @@ App is hosted in AWS using EC2 Stockholm instance.
 #### 2/5: Use of classes and IDs to style specific elements
 - Bootstrap classes and custom classes are applied to buttons, forms, and table elements for styling.
 - Example: Line 85 (`index.html`) uses `class="form-control"` to style form inputs.
-- Line 95 has <div id>
+- Line 95 has a div
 - A lot of IDs and classes are used for all parts of the page
 
 #### 3/5: Implementation of responsive design elements
